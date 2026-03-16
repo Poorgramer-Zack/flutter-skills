@@ -1,6 +1,6 @@
 ---
 name: "flutter-isolate"
-description: "Complete guide for offloading heavy computations to Dart Isolates in Flutter to eliminate UI jank. Use this skill whenever the user needs to run CPU-intensive tasks (JSON parsing, image processing, file I/O, encryption) in the background, asks about Isolate.run, compute(), ReceivePort/SendPort, background workers, concurrency, or preventing the UI thread from freezing. Always apply this skill when the user mentions isolates, multithreading, or background processing in Flutter."
+description: "Critical when: app freezes during JSON parsing, image processing, encryption, or file I/O. Prevents UI jank with Isolates. Apply when compute-intensive tasks block the UI thread, background workers are needed, or the app becomes unresponsive during heavy operations."
 metadata:
   last_modified: "2026-03-13 14:16:00 (GMT+8)"
 ---

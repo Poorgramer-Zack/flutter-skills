@@ -1,6 +1,6 @@
 ---
 name: "flutter-hooks-best-practices"
-description: "Best practices and guidelines for Flutter Hooks (v0.21.x). Use this skill when you need to write or review code related to Flutter Hooks (v0.21.x)."
+description: "When StatefulWidget boilerplate kills readability or you need React-style hooks in Flutter. Eliminates widget complexity and state management overhead. Apply when code readability suffers from traditional widget patterns."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

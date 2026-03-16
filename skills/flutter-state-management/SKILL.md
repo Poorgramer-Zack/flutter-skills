@@ -1,6 +1,6 @@
 ---
 name: "flutter-state-management"
-description: "Holistic encyclopedia on Flutter state management encompassing generic reactivity principles, Provider, Riverpod, and BLoC. Use this when architecting UI data flow or debugging state inconsistencies."
+description: "Apply when state causes infinite rebuilds, data races occur, or you can't decide between Provider/Riverpod/BLoC. Prevents state chaos, rebuilds, and inconsistencies across your app architecture."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

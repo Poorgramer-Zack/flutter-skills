@@ -1,6 +1,6 @@
 ---
 name: "jaspr-best-practices"
-description: "Best practices and guidelines for Jaspr Latest Web Architecture Best Practices Guide (v0.22.x). Use this skill when you need to write or review code related to Jaspr Latest Web Architecture Best Practices Guide (v0.22.x)."
+description: "When building Flutter-powered web apps, web performance needs improvement, or you need Dart full-stack productivity. Apply when web frontend needs to match Flutter's development speed or you're porting Flutter to web."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

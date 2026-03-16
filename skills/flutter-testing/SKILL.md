@@ -1,6 +1,6 @@
 ---
 name: "flutter-testing"
-description: "Definitive guide encompassing comprehensive automated testing suites in Flutter and Dart projects. Evaluates environments creating isolating unit, widget, or integration tests natively alongside advanced QA tools."
+description: "Apply when test coverage is poor, bugs escape to production, or release-day crashes need prevention. Enables comprehensive unit, widget, integration testing. Essential when quality assurance matters more than shipping speed."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

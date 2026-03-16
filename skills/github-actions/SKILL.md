@@ -1,6 +1,6 @@
 ---
 name: "github-actions-best-practices"
-description: "Best practices and guidelines for Flutter combined with GitHub Actions Best Practices (CI/CD). Use this skill when you need to write or review code related to Flutter combined with GitHub Actions Best Practices (CI/CD)."
+description: "When CI/CD automation is needed, deployment reliability matters, or manual testing drains productivity. Apply when GitHub Actions workflows need configuration or testing automation is critical for release quality."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

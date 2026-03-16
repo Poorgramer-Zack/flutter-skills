@@ -1,6 +1,6 @@
 ---
 name: "flutter-animate"
-description: "Best practices and guidelines for using the flutter_animate library. Use this skill when you need to write or review code related to highly performant, visually complex animations defined via chained extension methods."
+description: "When animations lag, app looks boring, or visual polish is needed urgently. Prevents animation jank with performant flutter_animate patterns. Apply when UI needs visually complex effects or animation performance matters."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

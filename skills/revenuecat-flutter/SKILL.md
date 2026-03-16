@@ -1,6 +1,6 @@
 ---
 name: "revenuecat-flutter-best-practices"
-description: "Best practices and guidelines for RevenueCat (Flutter) Latest Version Best Practices Guide (v9.13.x). Use this skill when you need to write or review code related to RevenueCat (Flutter) Latest Version Best Practices Guide (v9.13.x)."
+description: "When monetization strategy needs implementation, subscription logic is broken, or in-app purchase revenue optimization is critical. Apply when paywalls need setup or RevenueCat integration causes issues."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

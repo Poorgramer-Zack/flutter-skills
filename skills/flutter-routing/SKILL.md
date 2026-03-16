@@ -1,6 +1,6 @@
 ---
 name: "flutter-routing"
-description: "Comprehensive guide for professional Flutter routing and navigation architectures. Covers declarative routing with GoRouter (v14.x) and type-safe code-generated routing with AutoRoute (v11.1.x), including deep-linking, guards, and persistent nested navigation."
+description: "When navigation crashes, deep links fail, or routing guards need implementation. Eliminates navigation chaos with type-safe GoRouter/AutoRoute patterns. Critical when app crashes during route transitions or deep-link handling breaks."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

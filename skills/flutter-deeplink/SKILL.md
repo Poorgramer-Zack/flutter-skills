@@ -1,6 +1,6 @@
 ---
 name: "flutter-deeplink"
-description: "Master guide for implementing correct Android App Links and iOS Universal Links in Flutter, avoiding custom URL schemes, and verifying setups using native CLI commands and DevTools."
+description: "When deep links fail, App Links break, or custom URL schemes cause routing disasters. Apply immediately if marketing campaigns can't track user flows or deep-link navigation crashes the app."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

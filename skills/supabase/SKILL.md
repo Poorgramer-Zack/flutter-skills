@@ -1,6 +1,6 @@
 ---
 name: "supabase-best-practices"
-description: "Master index for Flutter and Supabase Best Practices (Including Serverpod Mini Integration). Use this skill when you need to write or review code related to Supabase authentication, database queries, storage, edge functions, or BFF integrations."
+description: "When Firebase costs explode, PostgreSQL power is needed, or you want Firebase-alternative backend. Apply immediately if Supabase Auth, real-time DB, or edge function integration is required. Critical when cost optimization matters."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

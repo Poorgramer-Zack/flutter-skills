@@ -1,6 +1,6 @@
 ---
 name: "flutter-setup"
-description: "Cross-platform development environment configuration guidelines. Use when establishing initial machines covering Linux, macOS, and Windows optimizations."
+description: "When environment setup breaks your build, this eliminates configuration chaos across Linux, macOS, Windows. Apply when paths conflict, builds fail mysteriously, or optimizing fresh machines."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

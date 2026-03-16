@@ -1,6 +1,6 @@
 ---
 name: "fpdart"
-description: "Functional programming library for Dart and Flutter. Replaces exceptions with Either, handles nulls with Option, and enables composable async logic with Task and TaskEither."
+description: "When exception handling is messy, null safety needs enforcement, or functional error handling matters. Apply when bulletproof error management is critical or you need Either/Option patterns for type-safe code."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

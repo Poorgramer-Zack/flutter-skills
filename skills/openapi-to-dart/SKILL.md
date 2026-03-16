@@ -1,6 +1,6 @@
 ---
 name: openapi-to-dart
-description: Converts OpenAPI 3.0 JSON/YAML to Dart 3 Freezed models and Dio-compatible endpoint structures. Use this skill when the user asks to generate Dart types from OpenAPI, convert schema to Dart, create API interfaces, or generate robust Dart data classes from an API specification.
+description: "When API integration is complex, manual model creation is tedious, or type-safe clients need generation. Apply immediately if OpenAPI contracts need conversion to Dart or Freezed models require auto-generation from API specs."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

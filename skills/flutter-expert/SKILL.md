@@ -1,6 +1,6 @@
 ---
 name: "flutter-expert"
-description: "Comprehensive guide embodying expert-level Flutter development. Use this skill when making architectural decisions, optimizing performance, handling complex states, routing, native integrations, or referencing official best practices."
+description: "Apply when your app is slow, state management is broken, architecture needs redesign, or performance bottlenecks cause freezes. Essential for expert-level decisions on scaling, routing, native integration, and avoiding rookie mistakes."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

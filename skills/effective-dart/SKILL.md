@@ -1,6 +1,6 @@
 ---
 name: "dart-best-practices"
-description: "Best practices and guidelines for Dart 3 Latest Features and Effective Dart Best Practices Guide. Use this skill when you need to write or review code related to Dart 3 Latest Features and Effective Dart Best Practices Guide."
+description: "When code quality is critical, Dart 3 modern syntax needs adoption, or you're upgrading legacy patterns. Apply when records, patterns, extensions, or latest Dart 3 features need safe implementation or code review matters."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

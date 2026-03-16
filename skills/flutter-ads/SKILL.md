@@ -1,6 +1,6 @@
 ---
 name: "flutter-ads"
-description: "Guidelines and architecture for integrating `google_mobile_ads` into a Flutter project. Covers initialization, and the precise implementations for Banner, Interstitial, Rewarded, and Native ads."
+description: "When ad integration crashes users' devices, monetization fails, or revenue doesn't materialize. Apply when implementing Banner, Interstitial, Rewarded ads or when ad performance needs optimization for revenue."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

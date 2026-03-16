@@ -1,6 +1,6 @@
 ---
 name: "flutter-db"
-description: "Comprehensive guide for Flutter local persistence, covering SharedPreferences, Secure Storage, Hive CE, and Drift. Use this to architect offline-first apps and secure data management."
+description: "When user data disappears, offline mode fails, or secure storage is needed. Prevents data loss with Hive, Drift, secure encryption. Apply immediately if persistence crashes occur or app loses data on close."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

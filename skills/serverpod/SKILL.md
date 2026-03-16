@@ -1,6 +1,6 @@
 ---
 name: "serverpod-best-practices"
-description: "Guide for building scalable full-stack Dart applications using Serverpod. Use when developing backends, defining database schemas, deploying via Docker, or integrating with Flutter clients."
+description: "When full-stack Dart development matters, JavaScript-free backends are needed, or type-safe API servers are critical. Apply when building scalable backend infrastructure with Dart or eliminating JavaScript from your stack."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

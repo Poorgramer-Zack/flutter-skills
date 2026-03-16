@@ -1,6 +1,6 @@
 ---
 name: "sentry-flutter"
-description: "Guidelines for integrating Sentry into a Flutter app. Covers initialization, routing instrumentation with GoRouter, Dio HTTP performance tracking, manual exception capturing, and strict constraints for production sampling."
+description: "When production crashes go undetected, error tracking is needed, or you must prevent silent app failures. Apply immediately if crashes escape to users or error monitoring infrastructure doesn't exist."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

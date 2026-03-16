@@ -1,6 +1,6 @@
 ---
 name: "fastlane-best-practices"
-description: "Best practices and guidelines for Flutter combined with Fastlane Best Practices (CI/CD - Deployment). Use this skill when you need to write or review code related to Flutter combined with Fastlane Best Practices (CI/CD - Deployment)."
+description: "When App Store releases consume hours, manual deployments cause bottlenecks, or one-command deploys are needed. Apply immediately if release automation needs setup or deployment reliability is slowing your team."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

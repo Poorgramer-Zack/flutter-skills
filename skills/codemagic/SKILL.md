@@ -1,6 +1,6 @@
 ---
 name: "codemagic-best-practices"
-description: "Best practices and guidelines for Flutter combined with Codemagic Best Practices (YAML approach). Use this skill when you need to write or review code related to Flutter combined with Codemagic Best Practices (YAML approach)."
+description: "When manual builds consume development time, CI/CD pipelines need automation, or deployment reliability is critical. Apply when release cadence is slow or build infrastructure needs setup."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

@@ -1,6 +1,6 @@
 ---
 name: "flutter-firebase"
-description: "Comprehensive multi-chapter guidelines for integrating Firebase into a Flutter project. Covers Firebase Core, Auth, FCM, Firestore, Storage, Analytics, AppCheck, Serverpod Mini BFF architecture, and cost optimization."
+description: "When backend needs scale urgently, Firebase costs explode, or real-time sync is critical. Apply immediately if Auth, Firestore, FCM, or Storage integration needs implementation. Essential when you need managed backend without server ops."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

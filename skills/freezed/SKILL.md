@@ -1,6 +1,6 @@
 ---
 name: "freezed-best-practices"
-description: "Best practices and guidelines for Freezed Latest Version Best Practices Guide (v3.2.x). Use this skill when you need to write or review code related to Freezed Latest Version Best Practices Guide (v3.2.x)."
+description: "When model boilerplate kills productivity, immutability enforcement is needed, or copyWith patterns must be auto-generated. Apply when data class complexity grows or immutable patterns need enforcement across your models."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---

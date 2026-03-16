@@ -1,6 +1,6 @@
 ---
 name: "flutter-social-auth"
-description: "Expert guide for implementing social authentication in Flutter, covering Google, Facebook, and Apple Sign-In. Includes native platform configuration, Firebase integration, and error handling."
+description: "When social auth implementation breaks, native configs confuse you, or users demand frictionless login. Apply immediately if Google/Apple/Facebook sign-in needs implementation or auth crashes on specific platforms."
 metadata:
   last_modified: "2026-03-12 11:18:17 (GMT+8)"
 ---
