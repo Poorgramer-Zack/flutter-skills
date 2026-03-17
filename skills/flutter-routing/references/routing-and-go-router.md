@@ -15,6 +15,10 @@ GoRouter spearheads the official Flutter ecosystem's endorsed Declarative Routin
 ```yaml
 dependencies:
   go_router: ^14.0.0
+
+dev_dependencies:
+  build_runner: ^2.4.0
+  go_router_builder: ^4.0.0
 ```
 
 ### 2. Basic Routing Setup Configurations
@@ -148,6 +152,69 @@ final router = GoRouter(
     return null; // Demanding NO interceptions required, explicitly permitting unimpeded passage progression natively!
   },
 );
+```
+
+### 6. Strongly-Typed Routing Framework (`go_router_builder`)
+
+To eradicate fragile runtime URL string-matching vulnerabilities definitively, deploy `go_router_builder` architecting robust, compile-time verified routing mechanisms natively.
+
+**1. Route Declarations:**
+Define routes extending `GoRouteData` aggressively utilizing `@TypedGoRoute` annotations forming hierarchical structures.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+// Imperatively required part directive
+part 'router.g.dart';
+
+@TypedGoRoute<HomeRoute>(
+  path: '/home',
+  routes: [
+    TypedGoRoute<DetailRoute>(path: 'detail/:id'),
+  ],
+)
+class HomeRoute extends GoRouteData {
+  const HomeRoute();
+  
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const HomeScreen();
+}
+
+class DetailRoute extends GoRouteData {
+  const DetailRoute({required this.id, this.sort});
+  
+  final String id; // Represents Path Parameter natively
+  final String? sort; // Represents Query Parameter natively
+  
+  @override
+  Widget build(BuildContext context, GoRouterState state) => DetailScreen(id: id, sort: sort);
+}
+```
+
+**2. Router Initialization:**
+The builder uniquely generates a unified `$appRoutes` resolving all top-level instantiated routes collectively.
+
+```dart
+final router = GoRouter(
+  initialLocation: '/home',
+  routes: $appRoutes, // Automatically aggregated global map
+);
+```
+
+**3. Type-Safe Navigation:**
+Execute transitions flawlessly leveraging instance-bound `.go(context)` methods exclusively. This secures parameter requirements validated completely at compilation-time, viciously blocking missing parameter runtime disasters!
+
+```dart
+// 🌟 Requirements strictly enforced explicitly at compile-time!
+const DetailRoute(id: '123', sort: 'desc').go(context);
+```
+
+**4. Triggering Code Generation:**
+Synthesize generated files systematically executing:
+
+```bash
+dart run build_runner build --delete-conflicting-outputs
 ```
 
 ## Constraints
