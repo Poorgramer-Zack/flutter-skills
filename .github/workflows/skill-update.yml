@@ -1,0 +1,127 @@
+name: Weekly Skill Update
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every Monday at 09:00 UTC
+    - cron: '0 9 * * 1'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-skills:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Use GITHUB_TOKEN for checkout so git push works without a PAT
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Flutter brings Dart SDK into PATH — required for `dart mcp-server`.
+      # cache: true handles the Flutter SDK cache automatically.
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      # Cache Dart pub packages separately (used by dart mcp-server internals)
+      - name: Cache pub packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.pub-cache
+          key: pub-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            pub-${{ runner.os }}-
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Cache npm global store so Copilot CLI install is fast on repeat runs
+      - name: Cache npm global
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-copilot-${{ runner.os }}
+          restore-keys: |
+            npm-copilot-${{ runner.os }}-
+
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+
+      # .mcp.json at repo root is auto-detected by Copilot CLI.
+      # It spawns `dart mcp-server` (now in PATH via Flutter step) which
+      # provides pub.dev query tools used inside the prompt below.
+      - name: Scan skills and update dependencies
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+        run: |
+          copilot -p "
+          You are maintaining a Flutter/Dart skills library. Each skill lives in skills/<name>/SKILL.md.
+
+          Your job:
+          1. Scan every skills/*/SKILL.md file.
+          2. Extract all pub.dev package names and their currently pinned versions
+             from pubspec.yaml code blocks inside each file.
+          3. For each package, use the dart MCP pub_dev tools to fetch the latest
+             stable version and its CHANGELOG from pub.dev.
+          4. Compare versions:
+             - MAJOR bump (breaking change): update version pins in SKILL.md,
+               revise code examples and description if APIs changed.
+             - MINOR bump (new feature): update version pins in SKILL.md,
+               note the new feature in a comment if relevant.
+             - PATCH only: skip.
+          5. For every SKILL.md that changed, prepend a new dated entry to
+             CHANGELOG.md at the repo root (the file already exists).
+
+          CHANGELOG.md entry format (prepend before the existing entries):
+          ## [YYYY-MM-DD]
+          - **<skill-name>**: Updated <package> <old_version> → <new_version> — <one-line summary>
+
+          Rules:
+          - Only write files that actually changed.
+          - Keep all existing SKILL.md content and structure intact; only update
+            version strings and code that references the changed API.
+          - Do not invent version numbers; use only what pub.dev returns.
+          " \
+            --model claude-sonnet-4.6 \
+            --allow-tool='dart:*' \
+            --allow-tool='shell(dart:*)' \
+            --allow-tool='shell(curl:*)' \
+            --allow-tool=write \
+            --no-ask-user \
+            -s
+
+      # gh CLI is pre-installed on ubuntu-latest — no install needed.
+      # GITHUB_TOKEN is sufficient for creating PRs within the same repo.
+      - name: Create PR if there are changes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No skill updates needed."
+            exit 0
+          fi
+
+          BRANCH="skill-update/$(date +%Y-%m-%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add -A
+          git commit -m "chore: weekly skill dependency update $(date +%Y-%m-%d)
+
+          Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+          git push origin "$BRANCH"
+
+          gh pr create \
+            --title "chore: weekly skill dependency update $(date +%Y-%m-%d)" \
+            --body "$(printf 'Automated weekly scan of Flutter/Dart package dependencies.\n\nSee [CHANGELOG.md](../blob/%s/CHANGELOG.md) for the full list of updates.' "$BRANCH")" \
+            --base main \
+            --head "$BRANCH"
