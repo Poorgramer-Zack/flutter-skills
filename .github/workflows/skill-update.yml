@@ -64,45 +64,34 @@ jobs:
       # .mcp.json at repo root is auto-detected by Copilot CLI.
       # It spawns `dart mcp-server` (now in PATH via Flutter step) which
       # provides pub.dev query tools used inside the prompt below.
+      # Note: -s (silent) is intentionally omitted so errors are visible in logs.
       - name: Scan skills and update dependencies
         env:
-          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          COPILOT_GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          copilot -p "
-          You are maintaining a Flutter/Dart skills library. Each skill lives in skills/<name>/SKILL.md.
+          copilot -p "You are maintaining a Flutter/Dart skills library. Each skill lives in skills/<name>/SKILL.md.
 
           Your job:
           1. Scan every skills/*/SKILL.md file.
-          2. Extract all pub.dev package names and their currently pinned versions
-             from pubspec.yaml code blocks inside each file.
-          3. For each package, use the dart MCP pub_dev tools to fetch the latest
-             stable version and its CHANGELOG from pub.dev.
+          2. Extract all pub.dev package names and their currently pinned versions from pubspec.yaml code blocks inside each file.
+          3. For each package, use the dart MCP pub_dev tools to fetch the latest stable version and its CHANGELOG from pub.dev.
           4. Compare versions:
-             - MAJOR bump (breaking change): update version pins in SKILL.md,
-               revise code examples and description if APIs changed.
-             - MINOR bump (new feature): update version pins in SKILL.md,
-               note the new feature in a comment if relevant.
+             - MAJOR bump (breaking change): update version pins in SKILL.md, revise code examples and description if APIs changed.
+             - MINOR bump (new feature): update version pins in SKILL.md.
              - PATCH only: skip.
-          5. For every SKILL.md that changed, prepend a new dated entry to
-             CHANGELOG.md at the repo root (the file already exists).
+          5. For every SKILL.md that changed, prepend a new dated entry to CHANGELOG.md at the repo root (the file already exists).
 
-          CHANGELOG.md entry format (prepend before the existing entries):
+          CHANGELOG.md entry format:
           ## [YYYY-MM-DD]
-          - **<skill-name>**: Updated <package> <old_version> → <new_version> — <one-line summary>
+          - **<skill-name>**: Updated <package> <old_version> to <new_version> - <one-line summary>
 
           Rules:
           - Only write files that actually changed.
-          - Keep all existing SKILL.md content and structure intact; only update
-            version strings and code that references the changed API.
-          - Do not invent version numbers; use only what pub.dev returns.
-          " \
-            --model claude-sonnet-4.6 \
+          - Keep all existing SKILL.md content and structure intact.
+          - Do not invent version numbers; use only what pub.dev returns." \
             --allow-tool='dart:*' \
-            --allow-tool='shell(dart:*)' \
-            --allow-tool='shell(curl:*)' \
             --allow-tool=write \
-            --no-ask-user \
-            -s
+            --no-ask-user
 
       # gh CLI is pre-installed on ubuntu-latest — no install needed.
       # GITHUB_TOKEN is sufficient for creating PRs within the same repo.
