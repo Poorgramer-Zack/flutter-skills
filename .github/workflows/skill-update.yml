@@ -23,32 +23,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       # Flutter brings Dart SDK into PATH — required for `dart mcp-server`.
-      # cache: true handles the Flutter SDK cache automatically.
+      # cache disabled to avoid conflicts with the pub cache step below.
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          cache: true
-
-      # Cache Dart pub packages separately (used by dart mcp-server internals).
-      # hashFiles returns empty string when no pubspec.yaml exists; key falls
-      # back to pub-Linux- which restore-keys also covers.
-      - name: Cache pub packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.pub-cache
-          key: pub-${{ runner.os }}-${{ hashFiles('**/pubspec.yaml') }}
-          restore-keys: |
-            pub-${{ runner.os }}-
-            pub-
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-      # Cache npm global store so Copilot CLI install is fast on repeat runs.
-      # Use a hash suffix so the key is distinct from the restore-key prefix.
+      # Only cache npm — Flutter/pub caching caused post-job save conflicts.
       - name: Cache npm global
         uses: actions/cache@v4
         with:
