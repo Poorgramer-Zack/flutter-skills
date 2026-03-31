@@ -78,7 +78,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if git diff --quiet && git diff --staged --quiet; then
+          if git diff --quiet -- skills/ CHANGELOG.md && git diff --staged --quiet -- skills/ CHANGELOG.md; then
             echo "No skill updates needed."
             exit 0
           fi
@@ -87,7 +87,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH"
-          git add -A
+          git add -- skills/ CHANGELOG.md
           git commit -m "chore: weekly skill dependency update $(date +%Y-%m-%d)
 
           Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
