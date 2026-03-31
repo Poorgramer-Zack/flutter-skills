@@ -27,15 +27,6 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Cache npm global
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: npm-copilot-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            npm-copilot-${{ runner.os }}-
-            npm-
-
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
 
@@ -66,7 +57,6 @@ jobs:
           - Only write files that actually changed.
           - Keep all existing SKILL.md content and structure intact.
           - Do not invent version numbers; use only what pub.dev returns." \
-            --model claude-sonnet-4.6 \
             --allow-tool='shell(curl:*)' \
             --allow-tool=write \
             --no-ask-user \
