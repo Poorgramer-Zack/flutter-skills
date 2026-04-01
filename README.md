@@ -28,7 +28,7 @@ skills/
 
 ### State Management
 - **`flutter-provider`**: Provider (v6.1.5+1) - ChangeNotifier + MVVM with memory leak prevention and disposal patterns
-- **`flutter-riverpod`**: Riverpod (v3.3.1) - Compile-safe reactive state with UnmountedRefException prevention
+- **`flutter-riverpod`**: Riverpod (v3.3.1) - Riverpod 3.0 compile-safe reactive state; `Consumer` scoped rebuilds; generic providers; mutations & offline persistence (experimental)
 - **`flutter-bloc`**: BLoC (v9.1.1) - Event-driven architecture with transformers and Freezed integration
 
 ### Database & Storage
@@ -53,10 +53,11 @@ skills/
 - **`flutter-isolate`**: Concurrency with ReceivePort cleanup and memory leak prevention
 - **`flutter-testing`**: Unit, widget, integration, golden tests with CI/CD troubleshooting
 - **`flutter-genui`**: AI-powered UI generation
+- **`marionette`**: AI-driven Flutter E2E testing via VM Service CLI — tap, scroll, enterText, screenshot on live debug builds
 
 ### UI Components & Theming
 - **`shadcn-flutter`**: Modern accessible UI components with theming
-- **`effective-dart`**: Dart style guide and best practices
+- **`effective-dart`**: Dart 3.10 best practices — dot shorthands, null-aware collection elements, wildcard variables, records, patterns, sealed classes
 
 ### Backend Integration
 - **`supabase`**: Realtime Postgres, Edge Functions, Authentication
@@ -66,7 +67,7 @@ skills/
 ### Utilities & Tools
 - **`freezed`**: Immutable models and union types with pattern matching
 - **`fpdart`**: Functional programming (Option, Either, Task)
-- **`openapi-to-dart`**: API client generation from OpenAPI specs
+- **`openapi-to-dart`**: Manual Dart API client implementation from OpenAPI specs using Dio + Equatable/Freezed
 - **`ts-to-dart`**: TypeScript to Dart conversion utilities
 - **`sentry-flutter`**: Error tracking and performance monitoring
 - **`revenuecat-flutter`**: Subscription billing and payment integration
@@ -94,25 +95,29 @@ skills/
 
 ---
 
-## 🚀 Recent Updates (2026-03-31)
+## 🚀 Recent Updates (2026-04-01)
 
-### Fleet Mode Deep Update - Production Best Practices
-- ✅ **All 8 Core Skills Updated** with 2026 production edge cases and troubleshooting
-- ✅ **4,980+ Lines** of new content: memory leak prevention, error handling, CI/CD guides
-- ✅ **85+ Code Examples** with ❌ anti-patterns and ✅ best practices
-- ✅ **12 Decision Tables** for technical choices (transformers, state management, architecture)
+### Fleet Mode Quality Audit — All 36 Skills
+- ✅ **36 SKILL.md files** audited and standardized to Agent Skill Best Practices
+- ✅ **Gerund naming** enforced (`applying-*`, `managing-*`, `testing-*`)
+- ✅ **Third-person descriptions** with trigger keywords for precise AI activation
+- ✅ **500-line limit** enforced — `flutter-bloc` (594→147 lines) and `flutter-riverpod` (625→162 lines) split with new `references/` files
 
-### Major Version Updates & Breaking Changes
-- ✅ **GoRouter v17.1.0**: Deep linking configuration, redirect loop prevention patterns
-- ✅ **Drift v2.32.x**: sqlite3 v3.x migration, WAL mode performance optimization
-- ✅ **Riverpod v3.3.1**: UnmountedRefException prevention, ref.mounted checks
-- ✅ **BLoC v9.1.1**: Event transformers guide (concurrent/sequential/restartable/droppable)
-- ✅ **SecureStorage v10.0.0**: Biometric invalidation handling, Android migration strategies
+### Riverpod 3.0 Full Coverage
+- ✅ **Breaking changes**: `==` equality for all state comparisons, fresh Notifier instances on rebuild (resource leak risk), `FamilyNotifier` removed, `Ref` generics removed
+- ✅ **Consumer vs ConsumerWidget**: decision table; prefer `Consumer` + `ref.watch().select()` for surgical rebuilds
+- ✅ **New APIs**: generic providers, `@Dependencies` scoping, `AsyncValue` sealed + `progress`, weak listeners, `overrideWithBuild`
+- ✅ **Mutations (experimental)**: `tsx.get()` pattern, exhaustive 4-state switch (`Idle/Pending/Error/Success`)
+- ✅ **Offline Persistence (experimental)**: `riverpod_sqflite`, `persist()` in `build()`, `StorageOptions`
 
-### New Modular Skills (Split from Aggregated Skills)
-- State Management: `flutter-provider`, `flutter-riverpod`, `flutter-bloc`
-- Database: `flutter-shared-preferences`, `flutter-secure-storage`, `flutter-hive`, `flutter-drift`
-- Routing: `flutter-gorouter`, `flutter-autoroute`
+### effective-dart — Dart 3.7–3.10 Features
+- ✅ **Dot shorthands** (3.10): `.blue` instead of `Color.blue`, `.all(16)` instead of `EdgeInsets.all(16)`
+- ✅ **Null-aware collection elements** (3.8): `[?nullable]` auto-excludes nulls
+- ✅ **Wildcard variables** (3.7): non-binding `_`, multiple `_` in same scope
+- ✅ **New lints** (3.9): `switch_on_type`, `unnecessary_unawaited`, `@awaitNotRequired`
+
+### openapi-to-dart — Reframed as Manual Implementation Guide
+- ✅ Removed code-generation framing; now covers Dio client setup, Equatable vs Freezed decision table, Service/Repository layers, `DioException → ApiError` mapping
 
 ---
 
