@@ -30,10 +30,17 @@ jobs:
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
 
-      - name: Scan skills and update dependencies
+      - name: Scan skills, update dependencies, and create PR
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          TODAY=$(date +%Y-%m-%d)
+          BRANCH="skill-update/$TODAY"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
           copilot -p "You are maintaining a Flutter/Dart skills library. Each skill lives in skills/<name>/SKILL.md.
 
           SKILL AUTHORING STANDARDS (read .github/instructions/skills.instructions.md for full rules):
@@ -58,46 +65,30 @@ jobs:
           5. For every SKILL.md that changed, prepend a new dated entry to CHANGELOG.md at the repo root (the file already exists).
 
           CHANGELOG.md entry format:
-          ## [YYYY-MM-DD]
+          ## [$TODAY]
           - **<skill-name>**: Updated <package> <old_version> to <new_version> - <one-line summary>
 
+          6. After all file updates, check if any SKILL.md or CHANGELOG.md actually changed:
+             git diff --quiet -- \$(find skills -name 'SKILL.md') CHANGELOG.md
+             If nothing changed, print 'No updates needed.' and stop.
+          7. If there are changes, commit and open a PR:
+             git checkout -b $BRANCH
+             git add -- \$(find skills -name 'SKILL.md') CHANGELOG.md
+             git commit -m 'chore: weekly skill dependency update $TODAY
+
+          Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>'
+             git push origin $BRANCH
+             gh pr create --title 'chore: weekly skill dependency update $TODAY' --body 'Automated weekly scan of Flutter/Dart package dependencies. See CHANGELOG.md for details.' --base main --head $BRANCH
+
           Rules:
-          - Only write files that actually changed.
+          - Only write files that actually changed (SKILL.md and CHANGELOG.md only — no temp files).
           - Keep all existing SKILL.md content and structure intact.
           - Do not invent version numbers; use only what pub.dev returns.
           - Follow all standards in .github/instructions/skills.instructions.md." \
             --model claude-sonnet-4.6 \
             --allow-tool='shell(curl:*)' \
+            --allow-tool='shell(git:*)' \
+            --allow-tool='shell(gh:*)' \
             --allow-tool='write(skills/**,CHANGELOG.md)' \
             --no-ask-user \
             -s
-
-      # gh CLI is pre-installed on ubuntu-latest — no install needed.
-      # Use COPILOT_GITHUB_TOKEN (PAT) for PR creation — GITHUB_TOKEN cannot
-      # create PRs unless "Allow GitHub Actions to create PRs" is enabled in repo settings.
-      - name: Create PR if there are changes
-        env:
-          GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-        run: |
-          # Only stage SKILL.md files and CHANGELOG.md — ignore any temp/test files
-          git add -- $(find skills -name 'SKILL.md') CHANGELOG.md
-
-          if git diff --staged --quiet; then
-            echo "No skill updates needed."
-            exit 0
-          fi
-
-          BRANCH="skill-update/$(date +%Y-%m-%d)"
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b "$BRANCH"
-          git commit -m "chore: weekly skill dependency update $(date +%Y-%m-%d)
-
-          Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
-          git push origin "$BRANCH"
-
-          gh pr create \
-            --title "chore: weekly skill dependency update $(date +%Y-%m-%d)" \
-            --body "$(printf 'Automated weekly scan of Flutter/Dart package dependencies.\n\nSee [CHANGELOG.md](../blob/%s/CHANGELOG.md) for the full list of updates.' "$BRANCH")" \
-            --base main \
-            --head "$BRANCH"
