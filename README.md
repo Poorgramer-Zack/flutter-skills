@@ -1,4 +1,4 @@
-# Flutter Skills 🚀
+# Dart Expert Skills 🚀
 
 A comprehensive library of modular AI Skills for Flutter & Dart development, designed for precise, production-ready AI Agent workflows. Each skill provides structured knowledge and expert-level guidance optimized for LLM consumption and human readability.
 
