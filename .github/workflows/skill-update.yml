@@ -73,12 +73,16 @@ jobs:
             -s
 
       # gh CLI is pre-installed on ubuntu-latest — no install needed.
-      # GITHUB_TOKEN is sufficient for creating PRs within the same repo.
+      # Use COPILOT_GITHUB_TOKEN (PAT) for PR creation — GITHUB_TOKEN cannot
+      # create PRs unless "Allow GitHub Actions to create PRs" is enabled in repo settings.
       - name: Create PR if there are changes
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
         run: |
-          if git diff --quiet -- skills/ CHANGELOG.md && git diff --staged --quiet -- skills/ CHANGELOG.md; then
+          # Only stage SKILL.md files and CHANGELOG.md — ignore any temp/test files
+          git add -- $(find skills -name 'SKILL.md') CHANGELOG.md
+
+          if git diff --staged --quiet; then
             echo "No skill updates needed."
             exit 0
           fi
@@ -87,7 +91,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH"
-          git add -- skills/ CHANGELOG.md
           git commit -m "chore: weekly skill dependency update $(date +%Y-%m-%d)
 
           Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
